@@ -48,11 +48,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
     System.out.print("new drivetrain subsystem created\n");
   }
 
-  /**use this function to make a Differential Drive Train move */
+  /**use this function to make a Differential Drive Train move with a tank drive control scheme. Left and Right will move independantly of each other */
   public void DriveDifferentialTank(double leftSpeed, double rightSpeed) {
     differentialDrivetrain.tankDrive(leftSpeed, rightSpeed);
   }
 
+  /**use this funtion to make Differntail Drive Train move with a curverture drive control scheme. Left and Right work together*/
   public void DriveDifferentialCurvature(double xSpeed, double zRotation) {
     differentialDrivetrain.curvatureDrive(xSpeed, zRotation, true);
   }
