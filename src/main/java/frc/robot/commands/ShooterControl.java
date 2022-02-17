@@ -14,7 +14,9 @@ public class ShooterControl extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.print("ShooterControl command initialized\n");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

@@ -26,13 +26,13 @@ public class DifferentialDriveTrainControl extends CommandBase {
 
 // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.print("DifferentialDriveTrainControl initialized\n");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double Speed = controller0.getRawAxis(1);
-    double rotation = controller0.getRawAxis(0);
     differentialDriveTrain.DriveDifferentialCurvature(controller0.getRawAxis(1), controller0.getRawAxis(0));
     controller0.setRumble(RumbleType.kRightRumble, 1);
   }
