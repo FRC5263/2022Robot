@@ -11,13 +11,16 @@ import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ballCollectorControl;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.ballCollectorSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DifferentialDriveTrainControl;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
@@ -32,15 +35,21 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  //declares variables for the drivetrain
   private MotorController frontRightMotor = new WPI_VictorSPX(8);
   private MotorController frontLeftMotor = new WPI_VictorSPX(10);
   private MotorController rearRightMotor = new WPI_VictorSPX(6);
   private MotorController rearLeftMotor = new WPI_VictorSPX(9);
-  private MotorController ballRollerMotor = new Sp
 
+  //declares drivetrain command
   private final Command m_teleOp = new DifferentialDriveTrainControl(new DriveTrainSubsystem(frontRightMotor, frontLeftMotor, rearRightMotor, rearLeftMotor));
 
-  //private final Command m_teleOp = new DifferentialDriveTrainControl(new DriveTrainSubsystem(frontRightMotor, frontLeftMotor));
+  //declares variables for the ball collector
+  private MotorController ballRoller = new Spark(3);
+  private ballCollectorSubsystem ballCollector = new ballCollectorSubsystem(ballRoller);
+
+  //declares ball roller command
+  private final Command m_ballCollector = new ballCollectorControl(ballCollector);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -55,8 +64,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //creates controller objects
     final XboxController m_controller = new XboxController(0);
-    
+    JoystickButton m_controllerAButton = new JoystickButton(m_controller, 1);
+
+    //command triggers
+    m_controllerAButton.whenActive(m_ballCollector);
   }
 
   public Command getTeleOpCommad() {
