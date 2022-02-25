@@ -22,15 +22,28 @@ import frc.robot.subsystems.ShooterSubsystem;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  private MotorController frontRightMotor = new WPI_VictorSPX(8);
-  private MotorController frontLeftMotor = new WPI_VictorSPX(10);
-  private MotorController rearRightMotor = new WPI_VictorSPX(6);
-  private MotorController rearLeftMotor = new WPI_VictorSPX(9);
-  private MotorController shooterLeft = new Spark(7);
-  private MotorController shooterRight = new Spark(5);
+  // CAN device ID assignments
+  private final int CAN_RR_DRIVE_MOTOR = 6;
+  private final int CAN_FR_DRIVE_MOTOR = 8;
+  private final int CAN_RL_DRIVE_MOTOR = 9;
+  private final int CAN_FL_DRIVE_MOTOR = 10;
+
+  // PWM channel assignments
+  private final int PWM_SHOOTER_LEFT = 0;
+  private final int PWM_SHOOTER_RIGHT = 1;
+  private final int PWM_VELCRO = 2;
+  private final int PWM_INTAKE = 3;
+
+  private MotorController frontRightMotor = new WPI_VictorSPX(CAN_FR_DRIVE_MOTOR);
+  private MotorController frontLeftMotor = new WPI_VictorSPX(CAN_FL_DRIVE_MOTOR);
+  private MotorController rearRightMotor = new WPI_VictorSPX(CAN_RR_DRIVE_MOTOR);
+  private MotorController rearLeftMotor = new WPI_VictorSPX(CAN_RL_DRIVE_MOTOR);
+
+  private MotorController shooterLeft = new Spark(PWM_SHOOTER_LEFT);
+  private MotorController shooterRight = new Spark(PWM_SHOOTER_RIGHT);
   private MotorController shooter = new MotorControllerGroup(shooterLeft, shooterRight);
-  private MotorController velcro = new Spark(6);
-  private MotorController intake = new Spark(8);
+  private MotorController velcro = new Spark(PWM_VELCRO);
+  private MotorController intake = new Spark(PWM_INTAKE);
 
   private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem(frontRightMotor, frontLeftMotor, rearRightMotor, rearLeftMotor);
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(shooter, velcro, intake);
