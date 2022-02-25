@@ -4,20 +4,19 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DifferentialDriveTrainControl;
-import frc.robot.subsystems.DriveTrainSubsystem;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.Teleop;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,8 +34,18 @@ public class RobotContainer {
   private MotorController frontLeftMotor = new WPI_VictorSPX(10);
   private MotorController rearRightMotor = new WPI_VictorSPX(6);
   private MotorController rearLeftMotor = new WPI_VictorSPX(9);
+  private MotorController shooterLeft = new Spark(7);
+  private MotorController shooterRight = new Spark(5);
+  private MotorController shooter = new MotorControllerGroup(shooterLeft, shooterRight);
+  private MotorController velcro = new Spark(6);
+  private MotorController intake = new Spark(8);
 
-  private final Command m_teleOp = new DifferentialDriveTrainControl(new DriveTrainSubsystem(frontRightMotor, frontLeftMotor, rearRightMotor, rearLeftMotor));
+  private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem(frontRightMotor, frontLeftMotor, rearRightMotor, rearLeftMotor);
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(shooter, velcro, intake);
+
+  final XboxController controller0 = new XboxController(0);
+  final XboxController controller1 = new XboxController(1);
+  private final Command m_teleOp = new Teleop(driveTrainSubsystem, shooterSubsystem, controller0, controller1);
 
   //private final Command m_teleOp = new DifferentialDriveTrainControl(new DriveTrainSubsystem(frontRightMotor, frontLeftMotor));
 
@@ -53,7 +62,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    final XboxController m_controller = new XboxController(0);
+    
     
   }
 
