@@ -38,8 +38,10 @@ public class Teleop extends CommandBase {
     differentialDriveTrain.DriveDifferentialCurvature(controller0.getRawAxis(1), controller0.getRawAxis(0));
     controller0.setRumble(RumbleType.kRightRumble, 1);
 
-    shooter.setIntake(controller1.getAButton());
+    shooter.setIntake(controller1.getAButton(), .7);
     shooter.setShooter(controller1.getRawAxis(2));
+    controller1.setRumble(RumbleType.kLeftRumble, controller1.getRawAxis(2));
+    controller1.setRumble(RumbleType.kRightRumble, controller1.getRawAxis(2));
     shooter.setVelcro(controller1.getXButton());
   }
 
