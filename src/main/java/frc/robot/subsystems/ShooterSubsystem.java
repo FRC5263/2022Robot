@@ -40,6 +40,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setIntake(boolean spinIntake) {
     if(spinIntake == true) {
+      System.out.print("spining intake");
       intake.set(.8);
     } else {
       intake.set(0);
@@ -70,6 +71,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setVelcro(boolean spinVelcro) {
     if(spinVelcro == true) {
+      System.out.print("spining velcro");
       velcro.set(.8);
     } else {
       velcro.set(0);
