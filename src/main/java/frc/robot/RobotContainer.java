@@ -49,8 +49,7 @@ public class RobotContainer {
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(shooter, velcro, intake);
 
   final XboxController controller0 = new XboxController(0);
-  final XboxController controller1 = new XboxController(1);
-  private final Command m_teleOp = new Teleop(driveTrainSubsystem, shooterSubsystem, controller0, controller1);
+  private final Command m_teleOp = new Teleop(driveTrainSubsystem, shooterSubsystem, controller0);
 
   public Command getTeleOpCommad() {
     return m_teleOp;
