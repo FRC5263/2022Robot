@@ -35,6 +35,18 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   /**
+   * Activates intake motor with boolean statments. use this function with a button
+   * @param offoron the intake turns on or off depending on if this parameter is true
+   */
+  public void setIntake(boolean spinIntake) {
+    if(spinIntake == true) {
+      intake.set(.8);
+    } else {
+      intake.set(0);
+    }
+  }
+
+  /**
    * Sets shooter wheel power for both shooter wheels.
    * @param power 1.0 = full power shoot i.e. balls will be shot up and out of the robot
    *              -1.0 = full pwoer reverse i.e. balls will be drawn down toward the floor
@@ -50,6 +62,18 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setVelcro(double power) {
     velcro.set(power);
+  }
+
+  /**
+   * activates velcro motor with a boolean. use this with buttons
+   * @param spinVelcro set to true to activate the motor
+   */
+  public void setVelcro(boolean spinVelcro) {
+    if(spinVelcro == true) {
+      velcro.set(.8);
+    } else {
+      velcro.set(0);
+    }
   }
 
   @Override
