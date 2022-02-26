@@ -21,7 +21,7 @@ public class ShooterSubsystem extends SubsystemBase {
     this.shooter = shooter;
     this.intake = intake;
     
-    System.out.print("new shooter subsystem created");
+    System.out.print("new shooter subsystem created\n");
   }
   
 
@@ -40,7 +40,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setIntake(boolean spinIntake) {
     if(spinIntake == true) {
-      System.out.print("spining intake");
+      System.out.print("spining intake\n");
       intake.set(.8);
     } else {
       intake.set(0);
@@ -71,7 +71,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setVelcro(boolean spinVelcro) {
     if(spinVelcro == true) {
-      System.out.print("spining velcro");
+      System.out.print("spining velcro\n");
       velcro.set(.8);
     } else {
       velcro.set(0);
