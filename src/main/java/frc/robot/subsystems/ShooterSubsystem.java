@@ -38,10 +38,10 @@ public class ShooterSubsystem extends SubsystemBase {
    * Activates intake motor with boolean statments. use this function with a button
    * @param offoron the intake turns on or off depending on if this parameter is true
    */
-  public void setIntake(boolean spinIntake) {
+  public void setIntake(boolean spinIntake, double speed) {
     if(spinIntake == true) {
       System.out.print("spining intake\n");
-      intake.set(.8);
+      intake.set(speed);
     } else {
       intake.set(0);
     }
