@@ -35,10 +35,10 @@ public class Teleop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    differentialDriveTrain.DriveDifferentialCurvature(controller0.getRawAxis(1), controller0.getRawAxis(0));
+    differentialDriveTrain.DriveDifferentialCurvature(-controller0.getRawAxis(1), -controller0.getRawAxis(0));
     controller0.setRumble(RumbleType.kRightRumble, 1);
 
-    shooter.setIntake(controller1.getAButton(), .7);
+    shooter.setIntake(controller1.getAButton(), .35);
     shooter.setShooter(controller1.getRawAxis(2));
     controller1.setRumble(RumbleType.kLeftRumble, controller1.getRawAxis(2));
     controller1.setRumble(RumbleType.kRightRumble, controller1.getRawAxis(2));
