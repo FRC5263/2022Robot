@@ -14,13 +14,15 @@ public class Teleop extends CommandBase {
   DriveTrainSubsystem differentialDriveTrain;
   ShooterSubsystem shooter;
   XboxController controller0;
+  XboxController controller1;
 
   /** Creates a new DifferentialControl. */
-  public Teleop(DriveTrainSubsystem drivetrain, ShooterSubsystem shooter, XboxController controller0) {
+  public Teleop(DriveTrainSubsystem drivetrain, ShooterSubsystem shooter, XboxController controller0, XboxController controller1) {
     System.out.print("creating new drivetrain control\n");
     this.differentialDriveTrain = drivetrain;
     this.shooter = shooter;
     this.controller0 = controller0;
+    this.controller1 = controller1;
     System.out.print("drivetrain control created\n");
   }
 
@@ -36,9 +38,9 @@ public class Teleop extends CommandBase {
     differentialDriveTrain.DriveDifferentialCurvature(controller0.getRawAxis(1), controller0.getRawAxis(0));
     controller0.setRumble(RumbleType.kRightRumble, 1);
 
-    shooter.setIntake(controller0.getAButton());
-    shooter.setShooter(controller0.getRawAxis(2));
-    shooter.setVelcro(controller0.getXButton());
+    shooter.setIntake(controller1.getAButton());
+    shooter.setShooter(controller1.getRawAxis(2));
+    shooter.setVelcro(controller1.getXButton());
   }
 
   // Called once the command ends or is interrupted.
