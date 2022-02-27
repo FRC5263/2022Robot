@@ -21,7 +21,7 @@ public class ShooterSubsystem extends SubsystemBase {
     this.shooter = shooter;
     this.intake = intake;
     
-    System.out.print("new shooter subsystem created");
+    System.out.print("new shooter subsystem created\n");
   }
   
 
@@ -32,6 +32,19 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setIntake(double power) {
     intake.set(power);
+  }
+
+  /**
+   * Activates intake motor with boolean statments. use this function with a button
+   * @param offoron the intake turns on or off depending on if this parameter is true
+   */
+  public void setIntake(boolean spinIntake, double speed) {
+    if(spinIntake == true) {
+      System.out.print("spining intake\n");
+      intake.set(speed);
+    } else {
+      intake.set(0);
+    }
   }
 
   /**
@@ -50,6 +63,19 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setVelcro(double power) {
     velcro.set(power);
+  }
+
+  /**
+   * activates velcro motor with a boolean. use this with buttons
+   * @param spinVelcro set to true to activate the motor
+   */
+  public void setVelcro(boolean spinVelcro) {
+    if(spinVelcro == true) {
+      System.out.print("spining velcro\n");
+      velcro.set(.8);
+    } else {
+      velcro.set(0);
+    }
   }
 
   @Override
