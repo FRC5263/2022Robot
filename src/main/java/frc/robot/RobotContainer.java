@@ -4,24 +4,16 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.*;
-import com.revrobotics.SparkMaxPIDController;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.ballCollectorControl;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.ballCollectorSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DifferentialDriveTrainControl;
-import frc.robot.subsystems.DriveTrainSubsystem;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.Teleop;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,50 +22,37 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // CAN device ID assignments
+  private final int CAN_RR_DRIVE_MOTOR = 6;
+  private final int CAN_FR_DRIVE_MOTOR = 8;
+  private final int CAN_RL_DRIVE_MOTOR = 9;
+  private final int CAN_FL_DRIVE_MOTOR = 10;
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  // PWM channel assignments
+  private final int PWM_SHOOTER_LEFT = 0;
+  private final int PWM_SHOOTER_RIGHT = 1;
+  private final int PWM_VELCRO = 2;
+  private final int PWM_INTAKE = 3;
 
-  //declares variables for the drivetrain
-  private MotorController frontRightMotor = new WPI_VictorSPX(8);
-  private MotorController frontLeftMotor = new WPI_VictorSPX(10);
-  private MotorController rearRightMotor = new WPI_VictorSPX(6);
-  private MotorController rearLeftMotor = new WPI_VictorSPX(9);
+  private MotorController frontRightMotor = new WPI_VictorSPX(CAN_FR_DRIVE_MOTOR);
+  private MotorController frontLeftMotor = new WPI_VictorSPX(CAN_FL_DRIVE_MOTOR);
+  private MotorController rearRightMotor = new WPI_VictorSPX(CAN_RR_DRIVE_MOTOR);
+  private MotorController rearLeftMotor = new WPI_VictorSPX(CAN_RL_DRIVE_MOTOR);
 
-  //declares drivetrain command
-  private final Command m_teleOp = new DifferentialDriveTrainControl(new DriveTrainSubsystem(frontRightMotor, frontLeftMotor, rearRightMotor, rearLeftMotor));
+  private MotorController shooterLeft = new Spark(PWM_SHOOTER_LEFT);
+  private MotorController shooterRight = new Spark(PWM_SHOOTER_RIGHT);
+  private MotorController shooter = new MotorControllerGroup(shooterLeft, shooterRight);
+  private MotorController velcro = new Spark(PWM_VELCRO);
+  private MotorController intake = new Spark(PWM_INTAKE);
 
-  //declares variables for the ball collector
-  private MotorController ballRoller = new Spark(3);
-  private ballCollectorSubsystem ballCollector = new ballCollectorSubsystem(ballRoller);
+  private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem(frontRightMotor, frontLeftMotor, rearRightMotor, rearLeftMotor);
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(shooter, velcro, intake);
 
-  //declares ball roller command
-  private final Command m_ballCollector = new ballCollectorControl(ballCollector);
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
-  }
-
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {
-    //creates controller objects
-    final XboxController m_controller = new XboxController(0);
-    JoystickButton m_controllerAButton = new JoystickButton(m_controller, 1);
-
-    //command triggers
-    m_controllerAButton.whenActive(m_ballCollector);
-  }
+  final XboxController controller0 = new XboxController(0);
+  final XboxController controller1 = new XboxController(1);
+  private final Command m_teleOp = new Teleop(driveTrainSubsystem, shooterSubsystem, controller0, controller1);
 
   public Command getTeleOpCommad() {
-    
     return m_teleOp;
   }
 

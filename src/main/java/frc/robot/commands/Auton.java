@@ -6,17 +6,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ShooterControl extends CommandBase {
-  /** Creates a new ShooterControl. */
-  public ShooterControl() {
+public class Auton extends CommandBase {
+  /** Creates a new Auton. */
+  public Auton() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    System.out.print("ShooterControl command initialized\n");
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
