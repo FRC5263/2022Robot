@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import pabeles.concurrency.ConcurrencyOps.NewInstance;
 
 /** Add your docs here. */
 public class RobotDashboard extends Robot{
@@ -17,7 +16,6 @@ public class RobotDashboard extends Robot{
 
     //shuffleboard stuff
     ShuffleboardTab mainTab = Shuffleboard.getTab("Robot: Main");
-    ShuffleboardTab diagnosticTab = Shuffleboard.getTab("Robot: Diagnostics");
     
     //wheel info
     public double backWheelDiameter;
@@ -39,6 +37,10 @@ public class RobotDashboard extends Robot{
     NetworkTableEntry shooterAim;
     NetworkTableEntry rollerPower;
     NetworkTableEntry velcroPower;
+    NetworkTableEntry frontRightWheelRPM;
+    NetworkTableEntry frontLeftWheelRPM;
+    NetworkTableEntry rearRightWheelRPM;
+    NetworkTableEntry rearLeftWheelRPM;
 
     public RobotDashboard() {}
 }
