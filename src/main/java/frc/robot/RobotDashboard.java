@@ -4,12 +4,21 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import pabeles.concurrency.ConcurrencyOps.NewInstance;
 
 /** Add your docs here. */
 public class RobotDashboard extends Robot{
     //varibable declerations
+
+    //shuffleboard stuff
+    ShuffleboardTab mainTab = Shuffleboard.getTab("Robot: Main");
+    ShuffleboardTab diagnosticTab = Shuffleboard.getTab("Robot: Diagnostics");
+    
     //wheel info
     public double backWheelDiameter;
     public double frontWheelDiameter;
@@ -21,6 +30,15 @@ public class RobotDashboard extends Robot{
     public Encoder frontLeftEncoder = new Encoder(2, 3, false, EncodingType.k2X);
     public Encoder rearRightEncoder = new Encoder(4, 5, false, EncodingType.k2X);
     public Encoder rearLeftEncoder = new Encoder(6, 7, false, EncodingType.k2X);
+
+    //networkTables
+    NetworkTableEntry robotVelocity;
+    NetworkTableEntry redGamePiecesControled;
+    NetworkTableEntry blueGamePiecesControled;
+    NetworkTableEntry shooterPower;
+    NetworkTableEntry shooterAim;
+    NetworkTableEntry rollerPower;
+    NetworkTableEntry velcroPower;
 
     public RobotDashboard() {}
 }
