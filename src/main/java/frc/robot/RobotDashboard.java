@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 
 /** Add your docs here. */
-public class RobotVariables extends Robot{
+public class RobotDashboard extends Robot{
     //varibable declerations
     //wheel info
     public double backWheelDiameter;
@@ -22,7 +22,5 @@ public class RobotVariables extends Robot{
     public Encoder rearRightEncoder = new Encoder(4, 5, false, EncodingType.k2X);
     public Encoder rearLeftEncoder = new Encoder(6, 7, false, EncodingType.k2X);
 
-    public RobotVariables() {}
-
-
+    public RobotDashboard() {}
 }
