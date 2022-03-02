@@ -4,11 +4,13 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** Add your docs here. */
 public class RobotDashboard extends Robot{
@@ -16,31 +18,12 @@ public class RobotDashboard extends Robot{
 
     //shuffleboard stuff
     ShuffleboardTab mainTab = Shuffleboard.getTab("Robot: Main");
-    
-    //wheel info
-    public double backWheelDiameter;
-    public double frontWheelDiameter;
-    public double backWheelCircumfrence;
-    public double frontWheelCircumfrence;
 
-    //encoders for the wheels
+    //encoders
     public Encoder frontRightEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k2X);
-    public Encoder frontLeftEncoder = new Encoder(2, 3, false, EncodingType.k2X);
-    public Encoder rearRightEncoder = new Encoder(4, 5, false, EncodingType.k2X);
-    public Encoder rearLeftEncoder = new Encoder(6, 7, false, EncodingType.k2X);
-
-    //networkTables
-    NetworkTableEntry robotVelocity;
-    NetworkTableEntry redGamePiecesControled;
-    NetworkTableEntry blueGamePiecesControled;
-    NetworkTableEntry shooterPower;
-    NetworkTableEntry shooterAim;
-    NetworkTableEntry rollerPower;
-    NetworkTableEntry velcroPower;
-    NetworkTableEntry frontRightWheelRPM;
-    NetworkTableEntry frontLeftWheelRPM;
-    NetworkTableEntry rearRightWheelRPM;
-    NetworkTableEntry rearLeftWheelRPM;
+    public Encoder frontLeftEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k2X);
+    public Encoder rearRightEncoder = new Encoder(4, 5, false, Encoder.EncodingType.k2X);
+    public Encoder rearLeftEncoder = new Encoder(6, 7, false, Encoder.EncodingType.k2X);
 
     public RobotDashboard() {}
 }

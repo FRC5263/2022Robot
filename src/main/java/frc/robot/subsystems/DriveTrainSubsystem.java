@@ -7,7 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.*;
 
 public class DriveTrainSubsystem extends SubsystemBase {
@@ -19,9 +19,13 @@ public class DriveTrainSubsystem extends SubsystemBase {
   MotorController frontLeftMotor;
   MotorController rearRightMotor;
   MotorController rearLeftMotor;
+  Encoder frontRightEncoder;
+  Encoder frontLeftEncoder;
+  Encoder rearRightEncoder;
+  Encoder rearLeftEncoder;
   DifferentialDrive differentialDrivetrain;
 
-
+  
   public DriveTrainSubsystem(MotorController frontRightMotor, MotorController frontLeftMotor, MotorController rearRightMotor, MotorController rearLeftMotor) {
     //makes variables for speedcontollers
     System.out.print("creating new drivetrain subsystem\n");
@@ -46,6 +50,13 @@ public class DriveTrainSubsystem extends SubsystemBase {
     System.out.print("new drivetrain subsystem created\n");
   }
 
+  public DriveTrainSubsystem(Encoder frontRightEncoder, Encoder frontLeftEncoder, Encoder rearRightEncoder, Encoder rearLeftEncoder) {
+    this.frontRightEncoder = frontRightEncoder;
+    this.frontLeftEncoder = frontLeftEncoder;
+    this.rearLeftEncoder = rearLeftEncoder;
+    this.rearRightEncoder = rearRightEncoder;
+  }
+
   /**use this function to make a Differential Drive Train move with a tank drive control scheme. Left and Right will move independantly of each other */
   public void DriveDifferentialTank(double leftSpeed, double rightSpeed) {
     differentialDrivetrain.tankDrive(leftSpeed, rightSpeed);
@@ -55,6 +66,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void DriveDifferentialCurvature(double xSpeed, double zRotation) {
     differentialDrivetrain.curvatureDrive(xSpeed, zRotation, true);
   }
+
 
   @Override
   public void periodic() {

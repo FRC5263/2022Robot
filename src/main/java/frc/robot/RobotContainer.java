@@ -6,6 +6,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -22,6 +23,8 @@ import frc.robot.subsystems.ShooterSubsystem;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  //encoders
+  
   // CAN device ID assignments
   private final int CAN_RR_DRIVE_MOTOR = 6;
   private final int CAN_FR_DRIVE_MOTOR = 8;
@@ -34,11 +37,13 @@ public class RobotContainer {
   private final int PWM_VELCRO = 2;
   private final int PWM_INTAKE = 3;
 
+  //drivetrain motors
   private MotorController frontRightMotor = new WPI_VictorSPX(CAN_FR_DRIVE_MOTOR);
   private MotorController frontLeftMotor = new WPI_VictorSPX(CAN_FL_DRIVE_MOTOR);
   private MotorController rearRightMotor = new WPI_VictorSPX(CAN_RR_DRIVE_MOTOR);
   private MotorController rearLeftMotor = new WPI_VictorSPX(CAN_RL_DRIVE_MOTOR);
 
+  //other motors
   private MotorController shooterLeft = new Spark(PWM_SHOOTER_LEFT);
   private MotorController shooterRight = new Spark(PWM_SHOOTER_RIGHT);
   private MotorController shooter = new MotorControllerGroup(shooterLeft, shooterRight);
