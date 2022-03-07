@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -18,18 +19,18 @@ public class Teleop extends CommandBase {
 
   /** Creates a new DifferentialControl. */
   public Teleop(DriveTrainSubsystem drivetrain, ShooterSubsystem shooter, XboxController controller0, XboxController controller1) {
-    System.out.print("creating new drivetrain control\n");
+    System.out.print("Creating new Teleop\n");
     this.differentialDriveTrain = drivetrain;
     this.shooter = shooter;
     this.controller0 = controller0;
     this.controller1 = controller1;
-    System.out.print("drivetrain control created\n");
+    System.out.print("Teleop created\n");
   }
 
 // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.print("DifferentialDriveTrainControl initialized\n");
+    System.out.print("Teleop initialized\n");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
