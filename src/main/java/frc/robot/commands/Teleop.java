@@ -13,6 +13,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class Teleop extends CommandBase {
   DriveTrainSubsystem differentialDriveTrain;
+  DriveTrainSubsystem driveTrainEncoders;
   ShooterSubsystem shooter;
   XboxController controller0;
   XboxController controller1;
@@ -43,12 +44,15 @@ public class Teleop extends CommandBase {
     shooter.setShooter(controller1.getRawAxis(2));
     controller1.setRumble(RumbleType.kLeftRumble, controller1.getRawAxis(2));
     controller1.setRumble(RumbleType.kRightRumble, controller1.getRawAxis(2));
+    controller0.setRumble(RumbleType.kLeftRumble, controller1.getRawAxis(2));
     shooter.setVelcro(controller1.getXButton());
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    controller0.setRumble(RumbleType.kRightRumble, 0);
+  }
 
   // Returns true when the command should end.
   @Override
