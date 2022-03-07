@@ -24,7 +24,11 @@ import frc.robot.subsystems.ShooterSubsystem;
  */
 public class RobotContainer {
   //encoders
-  
+  private Encoder frontRightEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k2X);
+  private Encoder frontLeftEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k2X);
+  private Encoder rearRightEncoder = new Encoder(4, 5, false, Encoder.EncodingType.k2X);
+  private Encoder rearLeftEncoder = new Encoder(6, 7, false, Encoder.EncodingType.k2X);
+
   // CAN device ID assignments
   private final int CAN_RR_DRIVE_MOTOR = 6;
   private final int CAN_FR_DRIVE_MOTOR = 8;
