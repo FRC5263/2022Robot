@@ -31,8 +31,8 @@ public class RobotContainer {
   // PWM channel assignments
   private final int PWM_SHOOTER_LEFT = 0;
   private final int PWM_SHOOTER_RIGHT = 1;
-  private final int PWM_VELCRO = 2;
-  private final int PWM_INTAKE = 3;
+  private final int PWM_VELCRO = 3;
+  private final int PWM_INTAKE = 2;
 
   private MotorController frontRightMotor = new WPI_VictorSPX(CAN_FR_DRIVE_MOTOR);
   private MotorController frontLeftMotor = new WPI_VictorSPX(CAN_FL_DRIVE_MOTOR);
