@@ -23,7 +23,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   Encoder frontLeftEncoder;
   Encoder rearRightEncoder;
   Encoder rearLeftEncoder;
-  Encoder[] encoders = {frontRightEncoder, frontLeftEncoder, rearRightEncoder, rearLeftEncoder};
+  Encoder[] encoders;
   DifferentialDrive differentialDrivetrain;
 
   /**
@@ -71,10 +71,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
    */
   public DriveTrainSubsystem(Encoder frontRightEncoder, Encoder frontLeftEncoder, Encoder rearRightEncoder, Encoder rearLeftEncoder) {
     System.out.print("creating new drivetrain Encoders\n");
+    //assignments
     this.frontRightEncoder = frontRightEncoder;
     this.frontLeftEncoder = frontLeftEncoder;
     this.rearLeftEncoder = rearLeftEncoder;
     this.rearRightEncoder = rearRightEncoder;
+    //appendments
+    Encoder[] encoders = {frontRightEncoder, frontLeftEncoder, rearRightEncoder, rearLeftEncoder};
+    this.encoders = encoders;
     System.out.print("new drivetrain encoders created\n");
   }
 
@@ -94,14 +98,27 @@ public class DriveTrainSubsystem extends SubsystemBase {
    * @return returns the 
    */
   public int getEncoder(int encoder) {
+    //checks if there are encoders to get
     if(encoders[encoder] != null) {
       return encoders[encoder].get();
     } else {
-      System.out.print(encoders[encoder] + " is not pluged in, cannot get encoder count");
+      System.out.print(encoders[encoder] + " is not pluged in, cannot get encoder count\n");
       return -1;
     }
   }
 
+  /**resets the drivetrain encoders */
+  public void resetDriveTrainEncoders() {
+    //checks if there are encoders to reset
+    if (encoders != null) {
+      //loops through the encoders array to iduvidually reset all of the encoders
+      for(int i = 0; i < encoders.length;  ++i) {
+        encoders[i].reset();
+      }
+    } else {
+      System.out.print("there are no encoders to reset or encoders not defined\n");
+    }
+  }
 
   @Override
   public void periodic() {
