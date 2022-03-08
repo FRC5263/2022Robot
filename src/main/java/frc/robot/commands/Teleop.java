@@ -18,9 +18,20 @@ public class Teleop extends CommandBase {
   XboxController controller0;
   XboxController controller1;
 
-  /** Creates a new DifferentialControl. */
+  /** Creates a new DifferentialControl without drivetrain encoders. */
   public Teleop(DriveTrainSubsystem drivetrain, ShooterSubsystem shooter, XboxController controller0, XboxController controller1) {
     System.out.print("Creating new Teleop\n");
+    this.differentialDriveTrain = drivetrain;
+    this.shooter = shooter;
+    this.controller0 = controller0;
+    this.controller1 = controller1;
+    System.out.print("Teleop created\n");
+  }
+
+  /** Creates a new DifferentialControl with Drive train encoders. */
+  public Teleop(DriveTrainSubsystem drivetrain, DriveTrainSubsystem driveTrainEncoders, ShooterSubsystem shooter, XboxController controller0, XboxController controller1) {
+    System.out.print("Creating new Teleop\n");
+    this.driveTrainEncoders = driveTrainEncoders;
     this.differentialDriveTrain = drivetrain;
     this.shooter = shooter;
     this.controller0 = controller0;
