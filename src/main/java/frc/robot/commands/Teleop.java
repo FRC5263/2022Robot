@@ -52,6 +52,7 @@ public class Teleop extends CommandBase {
     controller0.setRumble(RumbleType.kRightRumble, 1);
 
     shooter.setIntake(controller1.getAButton(), .9);
+    shooter.setIntake(controller1.getBButton(), 1.0);
     shooter.setShooter(controller1.getRawAxis(2)*.65);
     controller1.setRumble(RumbleType.kLeftRumble, controller1.getRawAxis(2));
     controller1.setRumble(RumbleType.kRightRumble, controller1.getRawAxis(2));
