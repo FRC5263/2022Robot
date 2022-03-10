@@ -7,6 +7,10 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.*;
 
@@ -26,6 +30,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
   Encoder[] encoders;
   DifferentialDrive differentialDrivetrain;
 
+  //public constants
+  public DifferentialDriveOdometry odometry;
+  public final double wheelDiameter = 6;
+  public DifferentialDriveKinematics kinematics;
+  public SimpleMotorFeedforward motorFeedforward;
+
   /**
    * creates a 4 motor differentail drivetrain
    * @param frontRightMotor the front right motor
@@ -44,6 +54,19 @@ public class DriveTrainSubsystem extends SubsystemBase {
     this.rightMotor = new MotorControllerGroup(rearRightMotor, frontRightMotor);
 
     this.differentialDrivetrain = new DifferentialDrive(leftMotor, rightMotor);
+
+    //constants stuff
+    double distancePerPulse = 0.1524 * Math.PI / 360;
+    rearRightEncoder.setDistancePerPulse(distancePerPulse);
+    rearLeftEncoder.setDistancePerPulse(distancePerPulse);
+
+    rearRightEncoder.reset();
+    rearLeftEncoder.reset();
+
+    odometry = new DifferentialDriveOdometry(new Rotation2d());
+    kinematics = new DifferentialDriveKinematics(.186);
+    motorFeedforward = new SimpleMotorFeedforward(.22, 1.95);
+
     System.out.print("new drivetrain subsystem created\n");
   }
 
