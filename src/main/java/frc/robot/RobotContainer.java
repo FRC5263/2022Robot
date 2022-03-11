@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.Auton;
 import frc.robot.commands.Teleop;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -54,12 +55,13 @@ public class RobotContainer {
   private MotorController velcro = new Spark(PWM_VELCRO);
   private MotorController intake = new Spark(PWM_INTAKE);
 
-  private final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem(frontRightMotor, frontLeftMotor, rearRightMotor, rearLeftMotor);
+  public final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem(frontRightMotor, frontLeftMotor, rearRightMotor, rearLeftMotor);
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(shooter, velcro, intake);
 
   final XboxController controller0 = new XboxController(0);
   final XboxController controller1 = new XboxController(1);
   private final Command m_teleOp = new Teleop(driveTrainSubsystem, shooterSubsystem, controller0, controller1);
+  private final Command m_auton = new Auton(driveTrainSubsystem, shooterSubsystem);
 
   public Command getTeleOpCommad() {
     return m_teleOp;
@@ -72,6 +74,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_teleOp;
+    return m_auton;
   }
+
 }

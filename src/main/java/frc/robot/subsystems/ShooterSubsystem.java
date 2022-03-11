@@ -47,6 +47,20 @@ public class ShooterSubsystem extends SubsystemBase {
     }
   }
 
+  public void setIntake(boolean spinPositive, boolean spinNegative, double speed) {
+    if(spinPositive == true) {
+      System.out.print("spining intake in\n");
+      intake.set(speed);
+    } else if(spinNegative == true){
+      System.out.print("spining intake out\n");
+      intake.set(-speed);
+    } else if (spinNegative == true && spinPositive == true) {
+      intake.set(0);
+    } else {
+      intake.set(0);
+    }
+  }
+
   /**
    * Sets shooter wheel power for both shooter wheels.
    * @param power 1.0 = full power shoot i.e. balls will be shot up and out of the robot
