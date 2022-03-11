@@ -6,12 +6,12 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShooterSubsystem extends SubsystemBase {
   //variable deleration 
-  MotorController shooter;
-  MotorController velcro;
-  MotorController intake;
+   MotorController shooter;
+   MotorController velcro;
+   MotorController intake;
 
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem(MotorController shooter, MotorController velcro, MotorController intake) {
@@ -32,6 +32,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setIntake(double power) {
     intake.set(power);
+    SmartDashboard.putNumber("Intake power", power);
   }
 
   /**
@@ -45,6 +46,7 @@ public class ShooterSubsystem extends SubsystemBase {
     } else {
       intake.set(0);
     }
+    
   }
 
   public void setIntake(boolean spinPositive, boolean spinNegative, double speed) {
@@ -68,6 +70,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setShooter(double power) {
     shooter.set(power);
+    SmartDashboard.putNumber("Shooter power", power);
   }
 
   /**
@@ -77,6 +80,7 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setVelcro(double power) {
     velcro.set(power);
+    SmartDashboard.putNumber("Velcro power", power);
   }
 
   /**
@@ -85,15 +89,27 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setVelcro(boolean spinVelcro) {
     if(spinVelcro == true) {
+      SmartDashboard.putBoolean("Spinning Velcro", spinVelcro);
       System.out.print("spining velcro\n");
       velcro.set(.8);
     } else {
+      SmartDashboard.putBoolean("Spinning Velcro", spinVelcro);
       velcro.set(0);
     }
   }
+  
+  
+    
+
+  
+
+
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+
+
 }
