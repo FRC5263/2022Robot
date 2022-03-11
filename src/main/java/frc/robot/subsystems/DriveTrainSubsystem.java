@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.*;
 
@@ -85,11 +86,15 @@ public class DriveTrainSubsystem extends SubsystemBase {
   /**use this function to make a Differential Drive Train move with a tank drive control scheme. Left and Right will move independantly of each other */
   public void DriveDifferentialTank(double leftSpeed, double rightSpeed) {
     differentialDrivetrain.tankDrive(leftSpeed, rightSpeed);
+    SmartDashboard.putNumber("tankDrive Left Speed", leftSpeed);
+    SmartDashboard.putNumber("tankDrive Right Speed", rightSpeed);
   }
 
   /**use this funtion to make Differntail Drive Train move with a curverture drive control scheme. Left and Right work together*/
   public void DriveDifferentialCurvature(double xSpeed, double zRotation) {
     differentialDrivetrain.curvatureDrive(xSpeed, zRotation, true);
+    SmartDashboard.putNumber("curvatureDrive Speed", xSpeed);
+    SmartDashboard.putNumber("curvatureDrive Rotation", zRotation);
   }
 
   /**
