@@ -16,6 +16,7 @@ import frc.robot.commands.Auton;
 import frc.robot.commands.Teleop;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.climberSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -41,6 +42,7 @@ public class RobotContainer {
   private final int PWM_SHOOTER_RIGHT = 1;
   private final int PWM_VELCRO = 3;
   private final int PWM_INTAKE = 2;
+  private final int PWM_CLIMBER = 4;
 
   //drivetrain motors
   private MotorController frontRightMotor = new WPI_VictorSPX(CAN_FR_DRIVE_MOTOR);
@@ -54,13 +56,15 @@ public class RobotContainer {
   private MotorController shooter = new MotorControllerGroup(shooterLeft, shooterRight);
   private MotorController velcro = new Spark(PWM_VELCRO);
   private MotorController intake = new Spark(PWM_INTAKE);
+  private MotorController climber = new Spark(PWM_CLIMBER);
 
   public final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem(frontRightMotor, frontLeftMotor, rearRightMotor, rearLeftMotor);
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem(shooter, velcro, intake);
+  private final climberSubsystem climberSubsystem = new climberSubsystem(climber);
 
   final XboxController controller0 = new XboxController(0);
   final XboxController controller1 = new XboxController(1);
-  private final Command m_teleOp = new Teleop(driveTrainSubsystem, shooterSubsystem, controller0, controller1);
+  private final Command m_teleOp = new Teleop(driveTrainSubsystem, shooterSubsystem, climberSubsystem, controller0, controller1);
   private final Command m_auton = new Auton(driveTrainSubsystem, shooterSubsystem);
 
   public Command getTeleOpCommad() {

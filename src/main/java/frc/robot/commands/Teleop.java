@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.climberSubsystem;
 
 public class Teleop extends CommandBase {
   DriveTrainSubsystem differentialDriveTrain;
@@ -17,14 +18,16 @@ public class Teleop extends CommandBase {
   ShooterSubsystem shooter;
   XboxController controller0;
   XboxController controller1;
+  climberSubsystem climber;
 
   /** Creates a new DifferentialControl without drivetrain encoders. */
-  public Teleop(DriveTrainSubsystem drivetrain, ShooterSubsystem shooter, XboxController controller0, XboxController controller1) {
+  public Teleop(DriveTrainSubsystem drivetrain, ShooterSubsystem shooter, climberSubsystem climber, XboxController controller0, XboxController controller1) {
     System.out.print("Creating new Teleop\n");
     this.differentialDriveTrain = drivetrain;
     this.shooter = shooter;
     this.controller0 = controller0;
     this.controller1 = controller1;
+    this.climber = climber;
     System.out.print("Teleop created\n");
   }
 
@@ -57,6 +60,7 @@ public class Teleop extends CommandBase {
     controller1.setRumble(RumbleType.kRightRumble, controller1.getRawAxis(2));
     controller0.setRumble(RumbleType.kLeftRumble, controller1.getRawAxis(2));
     shooter.setVelcro(controller1.getXButton());
+    climber.moveMotor(controller0.getRawAxis(5));
   }
 
   // Called once the command ends or is interrupted.
