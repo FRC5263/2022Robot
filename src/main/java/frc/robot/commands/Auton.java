@@ -30,10 +30,12 @@ public class Auton extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (timer.get() >= 0.0 && timer.get() <= .3) {
+    if (timer.get() >= 0.0 && timer.get() <= .45) {
       driveTrain.DriveDifferentialTank(-1.0, -1.0);
-    } else if (timer.get() >= .3) {
-      driveTrain.DriveDifferentialTank(0, 0);
+    } else if (timer.get() >= .45 && timer.get() <= .8) {
+      driveTrain.DriveDifferentialTank(1, 1);
+      //shooter.setVelcro(1);
+    } else if (timer.get() >= .8 && timer.get() < 2.0) {
       shooter.setVelcro(1);
     } else {
       driveTrain.DriveDifferentialTank(0, 0);
